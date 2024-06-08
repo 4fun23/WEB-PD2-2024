@@ -16,11 +16,16 @@
             </thead>
          <tbody>
 
-    @foreach($items as $author)
+    @foreach($items as $enduser)
     <tr>
-        <td>{{ $author->id }}</td>
-        <td>{{ $author->name }}</td>
-        <td>Labot / Dzēst</td>
+        <td>{{ $enduser->id }}</td>
+        <td>{{ $enduser->name }}</td>
+        <td> <a href="/endusers/update/{{ $enduser->id }}" class="btn btn-outline-primary btnsm">Labot</a> 
+        <form action="/endusers/delete/{{ $enduser->id }}" method="post" class="deletion-form d-inline">
+            @csrf 
+            <button type="submit" class="btn btn-outline-danger btn-sm">Dzēst</button>
+        </form>
+        </td>
     </tr>
     @endforeach
 

@@ -9,7 +9,7 @@
     @endif
 
 
-    <form method="post" action="/endusers/put">
+    <form method="post" action="{{ $enduser->exists ? '/endusers/patch/' . $enduser->id : '/endusers/put'}}">
         @csrf
 
         <div class="mb-3">
@@ -19,7 +19,9 @@
                 type="text"
                 class="form-control @error('name') is-invalid @enderror"
                 id="enduser-name"
-                name="name">
+                name="name"
+                value="{{ old('name', $enduser->name) }}"
+                >
 
             @error('name')
                 <p class="invalid-feedback">{{ $errors->first('name') }}</p>
@@ -27,7 +29,7 @@
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Pievienot</button>
+        <button type="submit" class="btn btn-primary">{{ $enduser->exists? 'Rediģēt' : 'Pievienot'}}</button>
     </form>
-    
+
 @endsection

@@ -27,7 +27,8 @@ class EnduserController extends Controller
         return view(
             'enduser.form',
             [
-                'title' => 'Pievienot lietotāju'
+                'title' => 'Pievienot lietotāju',
+                'enduser' => new Enduser()
             ]
             );
     }
@@ -41,6 +42,38 @@ class EnduserController extends Controller
         $enduser = new Enduser();
         $enduser->name = $validatedData['name'];
         $enduser->save();
+
+        return redirect('/endusers');
+    }
+
+    //Display enduser edit form
+    public function update(Enduser $enduser): View {
+        return view(
+            'enduser.form',
+            [
+                'title' => 'Rediģēt lietotāju',
+                'enduser' => $enduser,
+            ]
+            );
+    }
+
+
+    // update Enduser data
+    public function patch(Enduser $enduser, Request $request): RedirectResponse {
+        $validatedData = $request->validate([
+            'name' => 'required|String|max:255',
+        ]);
+
+        $enduser->name = $validatedData['name'];
+        $enduser->save();
+
+        return redirect('/endusers');
+    }
+
+    // delete Enduser 
+    public function delete(Enduser $enduser): RedirectResponse {
+       // šeit derētu pārbaude, kas neļauj dzēst lietotāju, ja tas piesaistīts profiliem
+       $enduser->delete();
 
         return redirect('/endusers');
     }

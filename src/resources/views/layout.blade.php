@@ -24,7 +24,7 @@ data-bs-target="#navbarNav">
                     <a class="nav-link" href="/">Sākumlapa</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/authors">Autori</a>
+                    <a class="nav-link" href="/endusers">Lietotāji</a>
                 </li>
             </ul>
         </div>
@@ -47,5 +47,7 @@ data-bs-target="#navbarNav">
     </div>
     </div>
 </footer>
+
+    <script src="/js/admin.js"></script>
  </body>
 </html>
