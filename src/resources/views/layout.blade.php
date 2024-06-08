@@ -48,6 +48,6 @@ data-bs-target="#navbarNav">
     </div>
 </footer>
 
-    <script src="/js/admin.js"></script>
+    <script src="/js/admin.js"> </script>
  </body>
 </html>
