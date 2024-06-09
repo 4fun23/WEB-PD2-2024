@@ -17,14 +17,32 @@ class Character extends Model
         'totalLevel',
         'questPoints',
         'collectionLogSlots',
-        ];
-        
+    ];
 
-    public function enduser(): BelongsTo{
+
+    public function enduser(): BelongsTo
+    {
         return $this->belongsTo(Enduser::class);
     }
 
-    public function gameMode(): belongsTo{
+    public function gameMode(): belongsTo
+    {
         return $this->belongsTo(Character::class);
     }
+
+    public function jsonSerialize(): mixed
+    {
+        return [
+            'id' => intval($this->id),
+            'username' => $this->username,
+            'bio' => $this->bio,
+            'enduser' => $this->enduser->name,
+            'gameMode' => ($this->gameMode ? $this->gameMode->name : ''),
+            'totalLevel' => number_format($this->totalLevel),
+            'questPoints' => number_format($this->questPoints),
+            'collectionLogSlots' => number_format($this->collectionLogSlots),
+            'image' => asset('images/' . $this->image),
+        ];
+    }
+
 }

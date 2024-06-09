@@ -14,22 +14,7 @@
             <p class="invalid-feedback">{{ $errors->first('name') }}</p>
         @enderror
     </div>
-    <div class="mb-3">
-        <label for="gameMode-character" class="form-label">Profils</label>
-        <select 
-            id="gameMode-character"
-            name="character_id"
-            class="form-select @error('character_id') is-invalid @enderror">
-            <option value="">Norādiet profilu!</option>
-            @foreach($characters as $character)
-                <option value="{{ $character->id }}" 
-                @if ($character->id == old('character_id', $gameMode->character->id ?? false)) selected @endif>{{ $character->username }}</option>
-            @endforeach
-        </select>
-        @error('character_id')
-            <p class="invalid-feedback">{{ $errors->first('character_id') }}</p>
-        @enderror
-    </div>
+    
     <button type="submit" class="btn btn-primary">
         {{ $gameMode->exists ? 'Atjaunot ierakstu' : 'Pievienot ierakstu' }}
     </button>

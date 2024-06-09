@@ -30,6 +30,28 @@
         @enderror
     </div>
     <div class="mb-3">
+            <label for="character-gameMode" class="form-label">Spēles režīms</label>
+
+            <select
+                id="character-gameMode"
+                name="gameMode_id"
+                class="form-select @error('gameMode_id') is-invalid @enderror"
+            >
+                <option value="">Norādiet spēles režīmu</option>
+                    @foreach($gameModes as $gameMode)
+                        <option
+                            value="{{ $gameMode->id }}"
+                            @if ($gameMode->id == old('gameMode_id', $character->gameMode->id ?? false)) selected @endif
+                        >{{ $gameMode->name }}</option>
+                    @endforeach
+            </select>
+
+            @error('gameMode_id')
+                <p class="invalid-feedback">{{ $errors->first('gameMode_id') }}</p>
+            @enderror
+        </div>
+
+    <div class="mb-3">
         <label for="character-bio" class="form-label">Bio</label>
         <textarea id="character-bio" name="bio"
             class="form-control @error('bio') is-invalid @enderror">{{ old('bio', $character->bio) }}</textarea>

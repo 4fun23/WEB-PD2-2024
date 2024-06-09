@@ -6,6 +6,7 @@ Use App\Http\Controllers\EnduserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CharacterController;
 use App\Http\Controllers\GameModeController;
+use App\Http\Controllers\DataController;
 
 Route::get('/', [HomeController::class, 'index']);
 
@@ -38,3 +39,9 @@ Route::post('/gameModes/put', [GameModeController::class, 'put']);
 Route::get('/gameModes/update/{gameMode}', [GameModeController::class, 'update']);
 Route::post('/gameModes/patch/{gameMode}', [GameModeController::class, 'patch']);
 Route::post('/gameModes/delete/{gameMode}', [GameModeController::class, 'delete']);
+
+// Data/API
+Route::get('/data/get-top-characters', [DataController::class, 'getTopCharacters']);
+Route::get('/data/get-character/{character}', [DataController::class, 'getCharacter']);
+Route::get('/data/get-related-characters/{character}', [DataController::class,
+'getRelatedCharacters']);

@@ -11,6 +11,7 @@
                 <th>ID</th>
                 <th>Profils</th>
                 <th>Lietotājvārds</th>
+                <th>Spēles režīms</th>
                 <th>Kvestu punktu skaits</th>
                 <th>Kopējais prasmju līmenis</th>
                 <th>Kolekciju priekšmetu skaits</th>
@@ -22,6 +23,7 @@
                     <td>{{ $character->id }}</td>
                     <td>{{ $character->username }}</td>
                     <td>{{ $character->enduser->name }}</td>
+                    <td>{{ $character->gameMode->name }}</td>
                     <td>{{ $character->questPoints }}</td>
                     <td>{{ $character->totalLevel}}</td>
                     <td>{{ $character->collectionLogSlots }}</td>
