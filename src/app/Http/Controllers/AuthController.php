@@ -28,7 +28,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
 
             //šo vēlāk nomainīsim uz /characters
-            return redirect('/endusers');
+            return redirect('/characters');
         }
 
         return back()->withErrors([

@@ -34,6 +34,10 @@ data-bs-target="#navbarNav">
                     </li>
 
                     <li class="nav-item">
+                        <a class="nav-link" href="/characters">Profili</a>
+                    </li>
+
+                    <li class="nav-item">
                         <a class="nav-link" href="/logout">Beigt darbu</a>
                     </li>
                 @else
