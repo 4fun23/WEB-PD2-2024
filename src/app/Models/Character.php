@@ -23,4 +23,8 @@ class Character extends Model
     public function enduser(): BelongsTo{
         return $this->belongsTo(Enduser::class);
     }
+
+    public function gameMode(): belongsTo{
+        return $this->belongsTo(Character::class);
+    }
 }

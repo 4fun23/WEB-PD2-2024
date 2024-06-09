@@ -23,6 +23,10 @@ data-bs-target="#navbarNav">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Sākumlapa</a>
                 </li>
+
+                <li class="nav-item">
+                        <a class="nav-link" href="/gameModes">Spēles režīmi</a>
+                    </li>
                 <!-- autentifikācijas pārbaude -->
                  @if(Auth::check())
 
@@ -43,6 +47,7 @@ data-bs-target="#navbarNav">
                 @else
 
                     <!-- lietas, kas redzamas neautentificētiem lietotājiem -->
+
                     <li class="nav-item">
                         <a class="nav-link" href="/login">Pieslēgties</a>
                     </li>
