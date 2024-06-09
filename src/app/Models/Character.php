@@ -10,6 +10,16 @@ class Character extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'enduser_id',
+        'bio',
+        'totalLevel',
+        'questPoints',
+        'collectionLogSlots',
+        ];
+        
+
     public function enduser(): BelongsTo{
         return $this->belongsTo(Enduser::class);
     }

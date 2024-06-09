@@ -8,9 +8,28 @@ use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controllers\HasMiddleware;
+use App\Http\Requests\CharacterRequest;
 
 class CharacterController extends Controller implements HasMiddleware
 {
+
+    private function saveCharacterData(Character $character, CharacterRequest $request): void{
+        $validatedData = $request->validated();
+
+        $character->fill($validatedData);
+
+        if ($request->hasFile('image')) {
+            $uploadedFile = $request->file('image');
+            $extension = $uploadedFile->clientExtension();
+            $name = uniqid();
+            $character->image = $uploadedFile->storePubliclyAs(
+            '/',
+            $name . '.' . $extension,
+            'uploads'
+            );
+           }
+        $character->save();
+    }
 
     // call auth middleware
     public static function middleware(): array
@@ -47,37 +66,10 @@ class CharacterController extends Controller implements HasMiddleware
         );
     }
     // create new Book entry
-    public function put(Request $request): RedirectResponse
+    public function put(CharacterRequest $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'username' => 'required|min:2|max:12',
-            'enduser_id' => 'required',
-            'bio' => 'nullable',
-            'totalLevel' => 'nullable|numeric',
-            'questPoints' => 'numeric',
-            'image' => 'nullable|image',
-            'collectionLogSlots' => 'nullable',
-        ]);
-
         $character = new Character();
-        $character->username = $validatedData['username'];
-        $character->enduser_id = $validatedData['enduser_id'];
-        $character->bio = $validatedData['bio'];
-        $character->totalLevel = $validatedData['totalLevel'];
-        $character->questPoints = $validatedData['questPoints'];
-        $character->collectionLogSlots = $validatedData['collectionLogSlots'];
-
-        if ($request->hasFile('image')) {
-            $uploadedFile = $request->file('image');
-            $extension = $uploadedFile->clientExtension();
-            $name = uniqid();
-            $character->image = $uploadedFile->storePubliclyAs(
-            '/',
-            $name . '.' . $extension,
-            'uploads'
-            );
-           }
-        $character->save();
+        $this->saveCharacterData($character, $request);
         return redirect('/characters');
     }
 
@@ -95,35 +87,9 @@ class CharacterController extends Controller implements HasMiddleware
         );
     }
     // update character data
-    public function patch(Character $character, Request $request): RedirectResponse
+    public function patch(Character $character, CharacterRequest $request): RedirectResponse
     {
-        $validatedData = $request->validate([
-            'username' => 'required|min:2|max:12',
-            'enduser_id' => 'required',
-            'bio' => 'nullable',
-            'totalLevel' => 'nullable|numeric',
-            'questPoints' => 'numeric',
-            'image' => 'nullable|image',
-            'collectionLogSlots' => 'nullable',
-        ]);
-
-        $character->username = $validatedData['username'];
-        $character->enduser_id = $validatedData['enduser_id'];
-        $character->bio = $validatedData['bio'];
-        $character->totalLevel = $validatedData['totalLevel'];
-        $character->questPoints = $validatedData['questPoints'];
-        $character->collectionLogSlots = $validatedData['collectionLogSlots'];
-        if ($request->hasFile('image')) {
-            $uploadedFile = $request->file('image');
-            $extension = $uploadedFile->clientExtension();
-            $name = uniqid();
-            $character->image = $uploadedFile->storePubliclyAs(
-            '/',
-            $name . '.' . $extension,
-            'uploads'
-            );
-           }
-        $character->save();
+        $this->saveCharacterData($character, $request);
         return redirect('/characters/update/' . $character->id);
     }
     // delete Character
