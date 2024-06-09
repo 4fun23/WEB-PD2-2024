@@ -12,11 +12,12 @@ class DataController extends Controller
 {
     public function getTopCharacters(): JsonResponse{
 
-        $characters = Character::where('totalLevel'>2000)
+        $characters = Character::where([])
             ->inRandomOrder()
             ->take(3)
-            ->get();
+            ->get()
         
+        ;
         return response()->json($characters);
     }
 
@@ -31,7 +32,7 @@ class DataController extends Controller
     return response()->json($selectedCharacter);
     }
     
-    // Return 3 published Books in random order- except the selected Book
+    // Return 3 characters in random order- except the selected character
     public function getRelatedCharacters(Character $character): JsonResponse
     {
     $characters = Character::
