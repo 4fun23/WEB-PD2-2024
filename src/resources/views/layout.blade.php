@@ -23,9 +23,27 @@ data-bs-target="#navbarNav">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Sākumlapa</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/endusers">Lietotāji</a>
-                </li>
+                <!-- autentifikācijas pārbaude -->
+                 @if(Auth::check())
+
+
+
+                    <!-- lietas, kas redzamas autentificētiem lietotājiem -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/endusers">Lietotāji</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Beigt darbu</a>
+                    </li>
+                @else
+
+                    <!-- lietas, kas redzamas neautentificētiem lietotājiem -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Pieslēgties</a>
+                    </li>
+
+                @endif
             </ul>
         </div>
         </div>

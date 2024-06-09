@@ -10,8 +10,21 @@ use App\Models\Enduser;
 
 use Illuminate\Http\RedirectResponse;
 
-class EnduserController extends Controller
+use Illuminate\Routing\Controllers\HasMiddleware;
+
+
+class EnduserController extends Controller implements hasMiddleware
 {
+    /**
+    * Get the middleware that should be assigned to the controller.
+    */
+    public static function middleware(): array
+    {
+        return [
+        'auth',
+        ];
+    }
+
     public function list(): View {
         $items = Enduser::orderBy('name', 'asc')->get();
         return view(
